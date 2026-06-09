@@ -611,6 +611,26 @@ func settingsHandler(w *Web) {
 		return
 	}
 
+	// The API token is managed by its own standalone forms, which do not
+	// submit the other settings fields. Handle it first and return so the
+	// empty email/SAML values below don't clobber the saved config.
+	switch w.r.FormValue("api_token_action") {
+	case "generate":
+		config.UpdateInfo(func(i *Info) error {
+			i.APIToken = RandomString(40)
+			return nil
+		})
+		w.Redirect("/settings?success=apitoken")
+		return
+	case "revoke":
+		config.UpdateInfo(func(i *Info) error {
+			i.APIToken = ""
+			return nil
+		})
+		w.Redirect("/settings?success=apitokenrevoked")
+		return
+	}
+
 	email := strings.ToLower(strings.TrimSpace(w.r.FormValue("email")))
 	samlMetadata := strings.TrimSpace(w.r.FormValue("saml_metadata"))
 

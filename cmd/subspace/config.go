@@ -68,6 +68,7 @@ type Info struct {
 	Domain     string `json:"domain"`
 	HashKey    string `json:"hash_key"`
 	BlockKey   string `json:"block_key"`
+	APIToken   string `json:"api_token"`
 	SAML       struct {
 		IDPMetadata string `json:"idp_metadata"`
 		PrivateKey  []byte `json:"private_key"`

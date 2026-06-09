@@ -204,6 +204,11 @@ func main() {
 	r.GET("/profile/qrconfig/wireguard/:profile", Log(WebHandler(wireguardQRConfigHandler, "profile/qrconfig/wireguard")))
 	r.GET("/static/*path", staticHandler)
 
+	// API (bearer token auth, configured from the settings page)
+	r.GET("/api/v1/users", Log(APIHandler(apiListUsers)))
+	r.POST("/api/v1/users", Log(APIHandler(apiAddUser)))
+	r.DELETE("/api/v1/users/:user", Log(APIHandler(apiDeleteUser)))
+
 	//
 	// Server
 	//
