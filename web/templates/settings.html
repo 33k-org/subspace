@@ -15,6 +15,10 @@
                         Admin account is setup. Configure SAML for SSO (optional).
                     {{else if eq $success "totp"}}
                         TOTP reset for default user, please reconfigure for improved security.
+                    {{else if eq $success "apitoken"}}
+                        API token generated. Copy it now &mdash; treat it like a password.
+                    {{else if eq $success "apitokenrevoked"}}
+                        API token revoked. The API is now disabled.
                     {{end}}
                 </div>
                 <a class="close-link" href="/settings"><i class="close icon"></i></a>
@@ -144,6 +148,52 @@
                 </div>
             {{end}}
         </form>
+
+        <div class="ui hidden section divider"></div>
+
+        <div class="ui {{$.SemanticTheme}} dividing header">API Access Token</div>
+        <div class="ui message">
+            <i class="info circle grey icon"></i>
+            A bearer token grants programmatic access to the user-management API
+            (list, add and delete users). Send it in the request header as
+            <code>Authorization: Bearer &lt;token&gt;</code>. Treat it like a password &mdash;
+            anyone with the token can manage users.
+        </div>
+        <div class="ui hidden divider"></div>
+
+        {{if $.Info.APIToken}}
+            <div class="field">
+                <div class="ui small header">Current Token</div>
+                <input class="readonly-input" type="text" value="{{$.Info.APIToken}}" readonly onclick="this.select()">
+            </div>
+            <div class="ui hidden divider"></div>
+            <div class="equal width fields">
+                <div class="field mobile hidden">&nbsp;</div>
+                <div class="field">
+                    <div class="two ui buttons">
+                        <form action="/settings" method="POST">
+                            <input type="hidden" name="api_token_action" value="revoke"/>
+                            <button type="submit" class="ui huge red button">Revoke</button>
+                        </form>
+                        <div class="or"></div>
+                        <form action="/settings" method="POST">
+                            <input type="hidden" name="api_token_action" value="generate"/>
+                            <button type="submit" class="ui huge {{$.SemanticTheme}} button">Regenerate</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        {{else}}
+            <div class="equal width fields">
+                <div class="field mobile hidden">&nbsp;</div>
+                <div class="field">
+                    <form action="/settings" method="POST">
+                        <input type="hidden" name="api_token_action" value="generate"/>
+                        <button type="submit" class="ui huge {{$.SemanticTheme}} button">Generate Token</button>
+                    </form>
+                </div>
+            </div>
+        {{end}}
     </div>
 </div>
 
