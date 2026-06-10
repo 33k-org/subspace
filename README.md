@@ -4,17 +4,11 @@
 [![All Contributors](https://img.shields.io/badge/all_contributors-26-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
-[![](https://images.microbadger.com/badges/image/subspacecommunity/subspace.svg)](https://microbadger.com/images/subspacecommunity/subspace "Get your own image badge on microbadger.com") [![](https://images.microbadger.com/badges/version/subspacecommunity/subspace.svg)](https://microbadger.com/images/subspacecommunity/subspace "Get your own version badge on microbadger.com")
-
-[![Go Report Card](https://goreportcard.com/badge/github.com/subspacecommunity/subspace)](https://goreportcard.com/report/github.com/subspacecommunity/subspace)
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=subspacecommunity_subspace&metric=alert_status)](https://sonarcloud.io/dashboard?id=subspacecommunity_subspace)
-[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=subspacecommunity_subspace&metric=ncloc)](https://sonarcloud.io/dashboard?id=subspacecommunity_subspace)
-[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=subspacecommunity_subspace&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=subspacecommunity_subspace)
-[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=subspacecommunity_subspace&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=subspacecommunity_subspace)
+[![Go Report Card](https://goreportcard.com/badge/github.com/33k-org/subspace)](https://goreportcard.com/report/github.com/33k-org/subspace)
 
 ---
 
-**IMPORTANT NOTICE**: shorthand dockerhub tags are **OUTDATED**. Please use long tags with the correct Arch for your CPU architecture, i.e. avoid `latest` or `1.5.0` tags and use instead `amd64-v1.5.0` for 64bit processors, `arm32v7-v1.5.0` for ARM v7, and so on. See [issue](https://github.com/subspacecommunity/subspace/issues/193).
+**NOTE**: This is the [33k-org](https://github.com/33k-org/subspace) fork. Container images are published to GitHub Container Registry as `ghcr.io/33k-org/subspace`, built as multi-arch manifests (`linux/amd64`, `linux/arm64`), so `:latest` resolves to the correct architecture automatically.
 
 ---
 
@@ -45,8 +39,8 @@ Join the slack community over at the [gophers](https://invite.slack.golangbridge
 
 |                                                                                                      |                                                                                                      |     |
 | :--------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------: | --- |
-| ![Screenshot 1](https://raw.githubusercontent.com/subspacecommunity/subspace/master/.github/screenshot1.png) | ![Screenshot 3](https://raw.githubusercontent.com/subspacecommunity/subspace/master/.github/screenshot3.png) |
-| ![Screenshot 2](https://raw.githubusercontent.com/subspacecommunity/subspace/master/.github/screenshot2.png) | ![Screenshot 4](https://raw.githubusercontent.com/subspacecommunity/subspace/master/.github/screenshot4.png) |
+| ![Screenshot 1](https://raw.githubusercontent.com/33k-org/subspace/master/.github/screenshot1.png) | ![Screenshot 3](https://raw.githubusercontent.com/33k-org/subspace/master/.github/screenshot3.png) |
+| ![Screenshot 2](https://raw.githubusercontent.com/33k-org/subspace/master/.github/screenshot2.png) | ![Screenshot 4](https://raw.githubusercontent.com/33k-org/subspace/master/.github/screenshot4.png) |
 
 ## Features
 
@@ -64,7 +58,7 @@ Join the slack community over at the [gophers](https://invite.slack.golangbridge
 
 ## Contributing
 
-See the [CONTRIBUTING](https://raw.githubusercontent.com/subspacecommunity/subspace/master/.github/CONTRIBUTING.md) page for additional info.
+See the [CONTRIBUTING](https://github.com/33k-org/subspace/blob/master/.github/CONTRIBUTING.md) page for additional info.
 
 ## Setup
 
@@ -140,7 +134,7 @@ $ subspace --http-host subspace.example.com
 
 #### Install WireGuard on the host
 
-The container expects WireGuard to be installed on the host. The official image is `subspacecommunity/subspace`.
+The container expects WireGuard to be installed on the host. The image is `ghcr.io/33k-org/subspace`.
 
 ```bash
 apt-get update
@@ -176,7 +170,7 @@ sysctl -w net.ipv6.conf.all.forwarding=1
 
 ```
 
-Follow the official Docker install instructions: [Get Docker CE for Ubuntu](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/)
+Follow the official Docker install instructions: [Install Docker Engine on Ubuntu](https://docs.docker.com/engine/install/ubuntu/)
 
 Make sure to change the `--env SUBSPACE_HTTP_HOST` to your publicly accessible domain name.
 
@@ -217,7 +211,7 @@ docker create \
     --env SUBSPACE_DISABLE_DNS=0 \
     # Optional variable to change PersistentKeepalive
     --env SUBSPACE_PERSISTENT_KEEPALIVE=20 \
-    subspacecommunity/subspace:latest
+    ghcr.io/33k-org/subspace:latest
 
 $ sudo docker start subspace
 
@@ -233,7 +227,7 @@ $ sudo docker logs subspace
 version: "3.3"
 services:
   subspace:
-   image: subspacecommunity/subspace:latest
+   image: ghcr.io/33k-org/subspace:latest
    container_name: subspace
    volumes:
     - /opt/docker/subspace:/data
@@ -264,7 +258,7 @@ Pull the latest image, remove the container, and re-create the container as expl
 
 ```bash
 # Pull the latest image
-$ sudo docker pull subspacecommunity/subspace
+$ sudo docker pull ghcr.io/33k-org/subspace
 
 # Stop the container
 $ sudo docker stop subspace
