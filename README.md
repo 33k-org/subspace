@@ -133,6 +133,7 @@ $ subspace --http-host subspace.example.com
 | `SUBSPACE_THEME`            | `green`             | The theme to use, please refer to [semantic-ui](https://semantic-ui.com/usage/theming.html) for accepted colors                                      |
 | `SUBSPACE_BACKLINK`         | `/`                 | The page to set the home button to                                                                                                                   |
 | `SUBSPACE_DISABLE_DNS`      | `false`             | Whether to disable DNS so the client uses their own configured DNS server(s). Consider disabling DNS server, if supporting international VPN clients |
+| `SUBSPACE_CLIENT_NAMESERVERS` | _(unset)_         | Comma-separated list of DNS servers to write into the client config's `DNS =` line (e.g. `8.8.8.8,1.1.1.1`). Overrides the default gateway DNS and `SUBSPACE_DISABLE_DNS` when set |
 | `SUBSPACE_PERSISTENT_KEEPALIVE`      | `0`             | Whether PersistentKeepalive should be enabled for clients (seconds) |
 
 ### Run as a Docker container
@@ -182,6 +183,8 @@ Make sure to change the `--env SUBSPACE_HTTP_HOST` to your publicly accessible d
 If you want to run the vpn on a different domain as the http host you can set `--env SUBSPACE_ENDPOINT_HOST`
 
 Use `--env SUBSPACE_DISABLE_DNS=1` to make subspace generate WireGuard configs without the `DNS` option, preserving the user's DNS servers.
+
+As an alternative, you can pass a list of preferred DNS servers in the `SUBSPACE_CLIENT_NAMESERVERS` variable (e.g. `--env SUBSPACE_CLIENT_NAMESERVERS="8.8.8.8,1.1.1.1"`).
 
 ```bash
 
